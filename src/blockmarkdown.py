@@ -33,25 +33,21 @@ def block_to_block_type(block):
     line = lines[0]
 
     if line.startswith("```") and lines[-1].startswith("```"):
-        print("Detected Type: CODE")  # Debug
         return BlockType.CODE
 
     if line.startswith(("# ", "## ", "### ", "#### ", "##### ", "###### ")):
-        print("Detected Type: HEADING")  # Debug
         return BlockType.HEADING
     
     if line.startswith(">"):
         for l in lines:
             if not l.startswith(">"):
                 return BlockType.PARAGRAPH
-        print("Detected Type: QUOTE")  # Debug
         return BlockType.QUOTE
     
     if line.startswith("- "):
         for l in lines:
             if not l.startswith("- "):
                 return BlockType.PARAGRAPH
-        print("Detected Type: UNORDERED_LIST")  # Debug
         return BlockType.UNORDERED_LIST
     
     num = 1
@@ -60,13 +56,11 @@ def block_to_block_type(block):
             if not l.startswith(f"{num}. "):
                 return BlockType.PARAGRAPH
             num += 1
-        print("Detected Type: ORDERED_LIST")  # Debug
         return BlockType.ORDERED_LIST
         
     return BlockType.PARAGRAPH
 
 
-#HTMLNode({self.tag}, {self.value}, {self.children}, {self.props}
 def text_to_children(text):
     text_nodes = text_to_textnodes(text)
     children = []
